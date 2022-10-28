@@ -1,0 +1,37 @@
+1.  JDBC 설정 및 DB 연결 
+    1) Java DataBase Connectivity
+    2) 자바로 데이터베이스 연결 및 관련 작업시 사용하는 API
+    3) JDBC API를 사용하기 위해서는 JDBC 드라이버가 있어야 함
+    4) 각 DBMS에 맞는 JDBC 드라이버로 다운로드한 후 설정하면 
+       DBMS 종류에 상관없이 동일한 방식 프로그래밍 가능.
+    
+2. 기본적인 DB 연결 관리 클래스
+    1) Connection : 연결 담당
+        - 프로토콜
+            - jdbc : postgresql://호스트명(IP):포트번호:스키마
+    2) Statement : 정적 쿼리문 실행할 때 사용됨
+    3) PreparedStatement : 인파라미터가 있는 동작 쿼리문 실행할 때 사용됨
+        - 인파라미터 : 쿼리문 작성 시 매개변수로 전달된 값 설정할 때 사용됨
+            - 쿼리문 작성 시 매개변수로 전달된 값 설정할 때 사용됨
+            - 미리 작성해둔 쿼리문에서 일부 값을 나중에 결정할 수 있게 해주는 매개변수
+            - 쿼리문에서 "?" (물음표)로 표현함
+        - executeUpdate()
+            - INSERT, UPDATE, DELETE 쿼리문 실행할 때 사용함
+            - 실행 후 영향을 받은 행의 개수가 INT 형으로 반환됨.
+        - executeQuery()
+            - SELECT 쿼리문 실행할 때 사용함
+            - 조회한 레코드들의 집합인 ResultSet 객체를 반환함
+    4) ResultSet
+        - SELECT 쿼리문의 결과를 저장할 때 사용됨.
+        - 결과 테이블에서 커서가 튜플을 가리킴
+            - next() : 다음 튜플을 가리킴
+            - getint(int columnIndex) : columnIndex가 가리키는 열값을 반환함
+
+3. JDBC 프로그래밍 순서 
+    1) JDBC 드라이버 로드
+    2) 데이터베이스 연결
+    3) 쿼리문 작성
+    4) 쿼리문 객체 생성 (Statement, PreparedStatement)
+    5) 쿼리 실행
+    6) 실행 결과 처리 
+    7) 연결 해제 (close 처리를 해주는 것.)
