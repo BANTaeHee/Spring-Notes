@@ -104,4 +104,4 @@
     1) Spring AOP 혹은 AspectJ에서 AOP가 적용되는 지점
     2) 해당 지점을 JoinPoint라는 인터페이스로 나타냄
     3) 어드바이스는 JoinPoint 하위 클래스인 ProceedingJoinPoint 타입의
-       파라미터를 필수적으로 선언해야 함.
+       파라미터를 필수적으로 선언해야 함. 
