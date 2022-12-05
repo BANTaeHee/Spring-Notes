@@ -1,40 +1,50 @@
-1. Spring MVC 00
-    1) 스프링 프레임워크를 구성하는 모듈, 정식 명칭은 Spring Web MVC 임.
-    2) 서블릿 API를 기반으로 작성된 웹 프레임워크(Web Framework)임
-    3) 프론트 컨트롤러 패턴과 MVC 아키텍쳐 패턴을 사용함. 
+1. Spring MVC 
+    1) 스프링 프레임워크를 구성하는 모듈, 정식 명식은 Spring Web MVC 임.
+    2) 서블릿 API를 기반으로 작성된 웹 프레임워크(Web Framework)임 
+    3) 프론트 컨트롤러 패턴과 MVC 아키텍쳐 패턴을 사용함 
     4) 유연하고 확장성이 뛰어난 구조를 제공함 
-    5) 자바 언어의 애노테이션(Annotation)과 리플렉션(Reflection) API를 적극 사용함.
+    5) 자바 언어의 애노테이션(Annotation)과 리플렉션(Reflection) API를 적극 사용함
     6) 애노테이션 기반 프로그래밍 (Annotation-based programming) 모델을 제공함
-    7) 경량 함수형 프로그래밍 모델 (functional programming model)을 지원함
-    
+    7) 경량 함수형 프로그래밍 모델 (functional programming model)을 지원함 
+
 2. 관심사의 분리 (Separation of Concerns)
-    1) 클라이언트에서 요청이 들어옴.
-    2) DispatcherServlet에서 입력을 처리, new Model()을 생성하여 Controller로 보냄
+    1) 클라이언트에서 요청이 들어옴     
+    2) DispatcherServlet에서 입력을 처리, new Model()을 생성하여 Controller로 보냄 
     3) Controller에서 매개변수로 Map의 형태인 Model을 받음.
     4) 유효성 검사를 통과하면 처리 및 Model에 작업 결과를 저장.
-    5) 작업 결과를 보여줄 View의 이름을 String으로 DispatcherServlet으로 전달
+    5) 작업 결과를 보여줄 View의 이름을 String으로 DispatcherServlet에게 반환.
     6) DispatcherServlet에서 반환된 View의 이름을 찾아서 Model을 전달 
-    7) 해당 View에서 클라이언트로 응답을 보냄
-    
+    7) 해당 View에서 클라이언트로 응답을 보냄 
+
         - 컨트롤러의 메서드 리턴타입 
             - String : 뷰이름을 반환
-            - void : Mapping된 url의 끝단어가 뷰 이름
-            - ModelAndView : Model과 뷰 이름을 반환.
+            - void : 매핑된 url의 끝단어가 뷰 이름     
+            - ModelAndView : Model과 뷰 이름을 반환 
                 - ModelAndView 객체를 Controller 내부에서 생성
-                - ModelAndView에 뷰의 이름과 작업 결과를 저장해서 반환
+                - ModelAndView에 뷰의 이름과 작업 결과를 저장해서 반환 
 
-3. DB 연동
-    1) 데이터를 주고받기 위한 DTO 클래스와 테이블에 접근하기 위한 DAO 클래스 
-    2) DAO (Data Access Object) 패턴
-        - 데이터 액세스 계층은 DAO 패턴을 적용하여 비즈니스 로직과 데이터 액세스 로직을 분리하는 것이 원칙임
+3. DB 연동 
+    1) 데이터를 주고받기 위한 DTO 클래스와 테이블에 접근하기 위한 DAO 클래스.
+    2) DAO (Data Access Object) 패턴 
+        - 데이터 액세스 계층은 DAO 패턴을 적용하여 
+          비즈니스 로직과 데이터 액세스 로직을 분리하는 것이 원칙임
         - 비즈니스 로직을 가진 엔터프라이즈 애플리케이션이라면 
           데이터 액세스 계층을 DAO 패턴으로 분리해야 함
-        - DAO 패턴은 서비스 계층에 영향을 주지 않고 데이터 액세스 기술을 변결할 수 있는 장점을 가짐.
+        - DAO 패턴은 서비스 계층에 영향을 주지 않고 
+          데이터 액세스 기술을 변경할 수 있는 장점을 가짐.  
         - JDBC를 통해 구현함
-        - 하나의 테이블에서 수행할 수 있는 CRUD 작업을  전담함
-        
+        - 하나의 테이블에서 수행할 수 있는 CRUD작업을 전담함 
+    3) DTO (Data Transfer Object)
+        - 계층 사이에서 데이터를 교환하기 위해 생성하는 객체.
+        - 별다른 조직 없이 속성(멤버 변수)과 그 속성에 접근하기 위한 
+           세터/케터 메서드만 갖춘게 특징임.
+
+
 4. 아키텍쳐 개요
-    1) 대부분의 중, 대규모 웹 애플리케이션은 효율적인 개발 및 유지보수를 위하여 계층화(Layering)하여 개발하는 것이 일반적임.
-    2) 프레젠테이션 계층(Presentation Layer), 서비스 계층(Service Layer), 데이터엑세스 계층(Data Access Layer)
-       3계층과 모든 계층에서 사용되는 도메인 모델로 구성됨.
-    3) 각각의 계층은 독립적으로 분리하여 구현하는 것이 가능해야 하며, 각 계층에서 담당해야 할 기능들이 있음. 
+    1) 대부분의 중,대규모 웹 애플리케이션은 효율적인 개발 및 유지보수를
+       위하여 계층화(Layering)하여 개발하는 것이 일반적임
+    2) 프리젠테이션 계층(Presentation Layer), 서비스 계층(Service Layer),
+       데이터액세스 계층(Data Access Layer) 3계층과 모든 계층에서 
+       사용되는 도메인 모델로 구성됨 
+    3) 각각의 계층은 독립적으로 분리하여 구현하는 것이 가능해야 하며,
+       각 계층에서 담당해야 할 기능들이 있음.
